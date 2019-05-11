@@ -1,13 +1,14 @@
 import urllib.request, time
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import datetime as dt
 
 def get_num():
     site = urllib.request.urlopen("https://www.dur.ac.uk/library/")
     str_ = str(site.read())
+    
     finding = str_[str_.index("donut-segment"):str_.index("donut-segment")+300].replace(" ", "")
     find = finding[finding.index("#552756\">"):finding.index("#552756\">")+20]
-
     num = find[find.index(">")+1:find.index("<")].replace(",", "")
     
     return num
@@ -15,14 +16,20 @@ def get_num():
 def get_time(int_ = 0):
     d = dt.datetime.now()
     if int_:
-        dString = str(d.hour)+str(d.minute)
-    else:
-        dString = str(d.hour)+":"+str(d.minute)
-    return dString
+        dString = str(d.hour)
+        if len(str(int((float((d.minute)/60)*100)))) == 1:
+            dString += "0"+str(int((float((d.minute)/60)*100)))
+        else:
+            dString += str(int((float((d.minute)/60)*100)))
 
-def plot(x, y):
-    plt.plot(x, y)
-    ply.show()
+    else:
+        dString = str(d.hour)+":"  
+        if len(str(d.minute)) == 1:
+            dString += "0"+str(d.minute)
+        else:
+            dString += str(d.minute)
+            
+    return dString
     
 xdata = []
 ydata = []
@@ -32,14 +39,25 @@ axes.set_xlim(int(get_time(1)), 2400)
 axes.set_ylim(0, 1800)
 line, = axes.plot(xdata, ydata, 'r-')
 
+plt.gcf().autofmt_xdate()
+#myFmt = mdates.DateFormatter('%H:%M')
+#plt.gca().xaxis.set_major_formatter(myFmt)
+
+
 while 1:
-    print("{}: {}".format(get_time(), get_num()))
-     
-    xdata.append(int(get_time(1)))
-    ydata.append(int(get_num()))
-    line.set_xdata(xdata)
-    line.set_ydata(ydata)
-    plt.pause(0.1)
+    try:
+        #print("{} ({}): {}".format(get_time(), get_time(1), get_num()))
+        print("{}: {}".format(get_time(), get_num()))
+         
+        xdata.append(int(get_time(1)))
+        ydata.append(int(get_num()))
+        line.set_xdata(xdata)
+        line.set_ydata(ydata)
+        plt.pause(0.1)
+        #print(xdata, ydata)
+        
+    except Exception as e:
+        print("Error: {}".format(e))
     
     time.sleep(60)
     
