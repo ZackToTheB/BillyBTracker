@@ -34,15 +34,13 @@ def get_time(int_ = 0):
 xdata = []
 ydata = []
 plt.show()
+plt.figure(num="Spaces Available in the Billy B")
 axes = plt.gca()
 axes.set_xlim(int(get_time(1)), 2400)
-axes.set_ylim(0, 1800)
+axes.set_ylim(0, 2000)
 line, = axes.plot(xdata, ydata, 'r-')
 
 plt.gcf().autofmt_xdate()
-#myFmt = mdates.DateFormatter('%H:%M')
-#plt.gca().xaxis.set_major_formatter(myFmt)
-
 
 while 1:
     try:
