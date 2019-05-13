@@ -42,7 +42,9 @@ line, = axes.plot(xdata, ydata, 'r-')
 
 plt.gcf().autofmt_xdate()
 
-while 1:
+run = True
+
+while run:
     try:
         #print("{} ({}): {}".format(get_time(), get_time(1), get_num()))
         print("{}: {}".format(get_time(), get_num()))
@@ -52,7 +54,9 @@ while 1:
         line.set_xdata(xdata)
         line.set_ydata(ydata)
         plt.pause(0.1)
-        #print(xdata, ydata)
+        
+        if get_time() == "23:59":
+            run = False
         
     except Exception as e:
         print("Error: {}".format(e))
