@@ -38,15 +38,12 @@ plt.figure(num="Spaces Available in the Billy B")
 axes = plt.gca()
 axes.set_xlim(int(get_time(1)), 2400)
 axes.set_ylim(0, 2000)
-line, = axes.plot(xdata, ydata, 'r-')
-
-plt.gcf().autofmt_xdate()
+line, = axes.plot(xdata, ydata, "r-")
 
 run = True
 
 while run:
     try:
-        #print("{} ({}): {}".format(get_time(), get_time(1), get_num()))
         print("{}: {}".format(get_time(), get_num()))
          
         xdata.append(int(get_time(1)))
