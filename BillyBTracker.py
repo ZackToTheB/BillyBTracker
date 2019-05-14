@@ -58,7 +58,8 @@ while run:
     except Exception as e:
         print("Error: {}".format(e))
     
-    time.sleep(60)
+    for i in range(12):
+        time.sleep(5)
     
         
 
