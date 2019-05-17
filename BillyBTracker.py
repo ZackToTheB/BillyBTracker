@@ -1,7 +1,8 @@
-import urllib.request, time
-import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
 import datetime as dt
+import urllib.request
+import time
 
 def get_num():
     site = urllib.request.urlopen("https://www.dur.ac.uk/library/")
